@@ -1,1 +1,1 @@
-from user_microservice import Config
+from user_microservice.config import Config
