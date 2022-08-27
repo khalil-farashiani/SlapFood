@@ -8,7 +8,7 @@ class Config:
     TESTING = int(environ.get("SLAPFOOD_TESTING", "0"))
     DEBUG = int(environ.get("SLAPFOOD_DEBUG", "0"))
     TIMEZONE = environ.get("SLAPFOOD_TIMEZONE", "Asia/Tehran")    
-    SECRET_KEY = environ.get("SLAPFOOD_SECRET_KEY", "HARD_HARD_SECRET_KEY")
+    SECRET_KEY = environ.get("SLAPFOOD_SECRET_KEY", "HARD_HARD_HARD_SECRET_KEY")
 
     # ================== Database Configu#FFFFFF#FFFFFF#FFFFFF#FFFFFFration =====================
 
