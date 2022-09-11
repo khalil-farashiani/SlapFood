@@ -1,17 +1,14 @@
-from curses import echo
 from fastapi import FastAPI
-from typing import Union
-from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
+from routers.apiv1 import user_router
+
+
 
 def create_app():
     app = FastAPI(name= __name__)
-    # get from ENV 
-    engine = create_engine(
-        "dsn",
-        echo=False,
-    )
+    app.include_router(user_router)
+    return app
+    
 
 Base = declarative_base()
 # settings = get_config(os.getenv("ENV") or "test")
