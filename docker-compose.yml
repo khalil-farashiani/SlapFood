@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  product-service:
+    build:
+      context: ./../product_microservice
+      dockerfile: ./../product_microservice/product-service.dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    deploy:
+      mode: replicated
+      replicas: 1
