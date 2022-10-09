@@ -8,11 +8,11 @@ user_router = APIRouter(
 )
 
 
-@user_router.get("/")
-def get_user():
+@user_router.get("/{user_id}")
+def get_user(user_id: int):
+    return {"error": "implement me!!"}
+
+
+@user_router.post("/")
+def create_user():
     return {"error": "emplement me!!"}
-
-
-@user_router.post("/{user_id}")
-def create_user(user_id: int):
-    return {"message": user_id, "error": "emplement me!!"}

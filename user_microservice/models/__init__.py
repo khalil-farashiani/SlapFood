@@ -1,1 +1,1 @@
-from user_microservice.models import apiv1
+from models import apiv1
