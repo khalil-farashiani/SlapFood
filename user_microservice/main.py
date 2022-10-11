@@ -12,11 +12,14 @@ from . import config
 def get_settings():
     return config.Setting()
 
+
+db = engine_from_config(get_settings().get_sqlAlchemy_conf(), prefix="user")
+
+
 def create_app():
     setting = get_settings()
     user_app = FastAPI(name=setting.APP_NAME, debug=setting.DEBUG)
     user_app.include_router(user_router)
-    _ = engine_from_config(get_settings().get_sqlAlchemy_conf(), prefix="user")
     return user_app
 
 

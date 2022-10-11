@@ -19,3 +19,6 @@ class User(Base):
     failed_auth_at = Column(DateTime)
     failed_auth_count = Column(Integer, default=0)
     status = Column(Integer, nullable=False, default=Setting.USER_DEFAULT_STATUS)
+
+    def __repr__(self):
+        return f"<User {self.username}"

@@ -1,1 +1,1 @@
-from user_microservice.schema.apiv1.users import User
+from schema.apiv1.users import User
