@@ -1,12 +1,23 @@
+from functools import lru_cache
+
 from fastapi import FastAPI
 from sqlalchemy.orm import declarative_base
-from routers.apiv1 import user_router
+from sqlalchemy import engine_from_config
 
+from routers.apiv1 import user_router
+from . import config
+
+
+@lru_cache()
+def get_settings():
+    return config.Setting()
 
 def create_app():
-    app = FastAPI(name=__name__)
-    app.include_router(user_router)
-    return app
+    setting = get_settings()
+    user_app = FastAPI(name=setting.APP_NAME, debug=setting.DEBUG)
+    user_app.include_router(user_router)
+    _ = engine_from_config(get_settings().get_sqlAlchemy_conf(), prefix="user")
+    return user_app
 
 
 app = create_app()

@@ -1,1 +1,1 @@
-from user_microservice.config import Config
+from config.config import Setting
