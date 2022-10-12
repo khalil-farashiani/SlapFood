@@ -1,8 +1,7 @@
 from fastapi import APIRouter
 from models.apiv1 import User
-from sqlalchemy import select
 from sqlalchemy.orm import Session
-from main import db
+from store.db.postgresql import db_engine
 
 user_router = APIRouter(
     prefix="/users",
@@ -13,7 +12,7 @@ user_router = APIRouter(
 
 @user_router.get("/{user_pk}")
 def get_user(user_pk: str):
-    session = Session(db)
+    session = Session(db_engine)
     user = session.get(User, user_pk)
     return {"error": user}
 
