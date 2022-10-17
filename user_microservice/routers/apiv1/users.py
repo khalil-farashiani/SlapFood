@@ -1,7 +1,5 @@
 from fastapi import APIRouter
-from models.apiv1 import User
-from sqlalchemy.orm import Session
-from store.db.postgresql import db_engine
+from store.db import get_user_data
 
 user_router = APIRouter(
     prefix="/users",
@@ -12,11 +10,10 @@ user_router = APIRouter(
 
 @user_router.get("/{user_pk}")
 def get_user(user_pk: str):
-    session = Session(db_engine)
-    user = session.get(User, user_pk)
-    return {"error": user}
+    get_user_data(user_pk)
+    return {"error": "Null"}
 
 
 @user_router.post("/")
 def create_user():
-    return {"error": "emplement me!!"}
+    return {"error": "implement me!!"}

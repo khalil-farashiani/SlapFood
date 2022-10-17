@@ -1,6 +1,5 @@
 from functools import lru_cache
 
-from sqlalchemy.orm import declarative_base
 from sqlalchemy import create_engine
 
 from config import Setting
@@ -17,5 +16,4 @@ def _init_db():
     return db
 
 
-base = declarative_base()
 db_engine = _init_db()
