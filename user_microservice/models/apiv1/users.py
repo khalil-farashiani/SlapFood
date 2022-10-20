@@ -10,9 +10,9 @@ base = declarative_base()
 class User(base):
     __tablename__: str = 'users'
     id = Column(String(64), primary_key=True, default=uuid.uuid4)
-    username = Column(String(128), unique=True, index=True, nullable=False)
-    password = Column(String(256), nullable=False)
-    role = Column(String(32), nullable=False, default=get_settings().USER_DEFAULT_ROLE)
+    email = Column(String(128), unique=True, index=True, nullable=False)
+    user_password = Column(String(256), nullable=False)
+    user_role = Column(String(32), nullable=False, default=get_settings().USER_DEFAULT_ROLE)
     created_at = Column(DateTime, nullable=False, default=datetime.now)
     expires_at = Column(DateTime, nullable=False, default=get_settings().USER_DEFAULT_TOKEN_EXPIRY_TIME)
     failed_auth_at = Column(DateTime)

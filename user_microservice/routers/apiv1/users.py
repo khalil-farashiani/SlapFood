@@ -10,8 +10,8 @@ user_router = APIRouter(
 
 @user_router.get("/{user_pk}")
 def get_user(user_pk: str):
-    get_user_data(user_pk)
-    return {"error": "Null"}
+    user = get_user_data(user_pk)
+    return {"error": user}
 
 
 @user_router.post("/")

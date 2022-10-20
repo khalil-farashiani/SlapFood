@@ -1,14 +1,45 @@
-version: '3'
+version: '3.5'
 
 services:
-
-  product-service:
-    build:
-      context: ./../product_microservice
-      dockerfile: ./../product_microservice/product-service.dockerfile
-    restart: always
+  #postgres_container
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    command: -p 6501
     ports:
-      - "8080:8080"
+      - "6501:6501"
+    expose:
+      - 6501
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  #user-service container
+  user-service:
+    build:
+      context: ./user_microservice
+      dockerfile: ./user-service.Dockerfile
+    restart: always
+    depends_on: 
+      - postgres
+    ports:
+      - "6500:6500"
     deploy:
       mode: replicated
       replicas: 1
+    networks:
+      - postgres
+    
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+    postgres:
+  

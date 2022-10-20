@@ -1,16 +1,17 @@
 package main
 
 import (
-	"net/http"
 	"log"
+	"net/http"
+
 	"github.com/gorilla/mux"
 )
 
-func routes() http.Handler{
+func routes() http.Handler {
 	log.Println(
 		"start server on port 8080",
 	)
-	r := mux.NewRouter()	
+	r := mux.NewRouter()
 	return r
 
 }
