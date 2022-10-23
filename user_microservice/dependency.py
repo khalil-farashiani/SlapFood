@@ -1,5 +1,5 @@
 from fastapi import Header, HTTPException
-
+from store.db.database import SessionLocal
 
 # TODO: complete this section
 
@@ -11,3 +11,11 @@ async def get_token_header(x_token: str = Header()):
 async def get_query_token(token: str):
     if token != "slapfood":
         raise HTTPException(status_code=400, detail="No slapfood token provided")
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

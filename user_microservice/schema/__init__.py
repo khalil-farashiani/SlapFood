@@ -1,1 +1,1 @@
-from user_microservice.schema import apiv1
+from schema import apiv1
