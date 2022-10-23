@@ -14,7 +14,7 @@ user_router = APIRouter(
 
 @user_router.get("/{user_pk}", response_model=GetUser)
 def read_user(user_pk: str, db: Session = Depends(get_db)):
-    user = get_user(user_pk)
+    user = get_user(db, user_pk)
     return user
 
 @user_router.post("/")

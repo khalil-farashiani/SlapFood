@@ -3,4 +3,4 @@ from sqlalchemy.orm import Session
 
 
 def get_user(db: Session, user_id: str):
-    return db.get(User, user_id)
+    return db.query(User).filter(User.id == user_id).first()

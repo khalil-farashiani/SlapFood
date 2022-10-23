@@ -11,7 +11,7 @@ class User(base):
     __tablename__: str = 'users'
     id                = Column(String(64), primary_key=True, default=uuid.uuid4)
     email             = Column(String(128), unique=True, index=True, nullable=False)
-    name              = Column(String(256), nullable=True)
+    real_name         = Column(String(256), nullable=True)
     mobile            = Column(String(256), nullable=True)
     user_password     = Column(String(256), nullable=False)
     user_role         = Column(String(32), nullable=False, default=get_settings().USER_DEFAULT_ROLE)

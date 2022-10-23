@@ -8,9 +8,9 @@ from config import get_settings
 
 def _init_session():
     setting = get_settings()
-    db = create_engine(url=setting.SQLALCHEMY_DATABASE_URI)
-    session = sessionmaker(autocommit=False, autoflush=True, bind=db)
-    return session
+    engine = create_engine(url=setting.SQLALCHEMY_DATABASE_URI)
+    session = sessionmaker(autocommit=False, autoflush=True, bind=engine)
+    return session, engine
 
-SessionLocal = _init_session
+SessionLocal, engine = _init_session()
 

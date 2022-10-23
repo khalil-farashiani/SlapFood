@@ -3,12 +3,7 @@ from functools import lru_cache
 from fastapi import FastAPI
 
 from routers.apiv1 import user_router
-from config import Setting
-
-
-@lru_cache()
-def get_settings():
-    return Setting()
+from config import get_settings
 
 
 setting = get_settings()
