@@ -10,6 +10,7 @@ class Setting(BaseSettings):
     DEBUG: bool = True
     TIMEZONE: str = "Asia/Tehran"
     SECRET_KEY: str = "VERY_HARD_HARD_HARD_SECRET_KEY"
+    REFRESH_TOKEN_SECRET_KEY: str = "VERY_HARD_HARD_HARD_SECRET_KEY"
 
     # ================== Database Configuration =====================
 
