@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,pycharm,goland,database,go,python,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,pycharm,goland,database,go,python,visualstudiocode
 
+.vscode
 ### Database ###
 *.accdb
 *.db
