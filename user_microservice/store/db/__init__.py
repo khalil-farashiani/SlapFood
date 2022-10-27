@@ -1,1 +1,1 @@
-from store.db.user_dao import get_user
+from store.db.user_dao import get_user, get_user_by_email

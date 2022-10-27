@@ -1,6 +1,6 @@
 from fastapi import Header, HTTPException
-from store.db.database import SessionLocal
-
+from store.db.database import SessionLocal, engine
+from models.apiv1.users import base
 # TODO: complete this section
 
 async def get_token_header(x_token: str = Header()):
@@ -19,3 +19,6 @@ def get_db():
         yield db
     finally:
         db.close_all()
+
+def create_tables():
+    base.metadata.create_all(bind=engine)

@@ -1,5 +1,3 @@
-from functools import lru_cache
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from config import get_settings
@@ -13,4 +11,3 @@ def _init_session():
     return session, engine
 
 SessionLocal, engine = _init_session()
-
