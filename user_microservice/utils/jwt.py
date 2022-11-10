@@ -1,6 +1,6 @@
 import os
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, Union
 from jose import jwt
 from config import get_settings
 
@@ -13,7 +13,7 @@ JWT_SECRET_KEY = settings.SECRET_KEY   #should be kept secret
 JWT_REFRESH_SECRET_KEY = settings.REFRESH_TOKEN_SECRET_KEY   # should be kept secret
 
 
-def create_access_token(subject: str|Any, expires_delta: int = 0) -> str:
+def create_access_token(subject: Union[str, Any], expires_delta: int = 0) -> str:
     if expires_delta is not 0:
         expires_delta = datetime.utcnow() + expires_delta
     else:
@@ -23,7 +23,7 @@ def create_access_token(subject: str|Any, expires_delta: int = 0) -> str:
     encoded_jwt = jwt.encode(to_encode, JWT_SECRET_KEY, ALGORITHM)
     return encoded_jwt
 
-def create_refresh_token(subject: str|Any, expires_delta: int = 0) -> str:
+def create_refresh_token(subject: Union[str, Any], expires_delta: int = 0) -> str:
     if expires_delta is not 0:
         expires_delta = datetime.utcnow() + expires_delta
     else:

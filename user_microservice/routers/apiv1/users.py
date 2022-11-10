@@ -16,7 +16,6 @@ def read_user(user_pk: str, db: Session = Depends(get_db)):
     user = get_user(db, user_pk)
     if user is None:
         return HTTPException(404, detail="Not found")
-    print(user)
     return user
 
 @user_router.post("/")

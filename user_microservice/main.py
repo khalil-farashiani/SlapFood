@@ -1,5 +1,3 @@
-from functools import lru_cache
-
 from fastapi import FastAPI
 
 from routers.apiv1 import user_router, auth_router
