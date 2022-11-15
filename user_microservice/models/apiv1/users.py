@@ -19,6 +19,7 @@ class User(base):
     expires_at        = Column(DateTime, nullable=False, default=get_settings().USER_DEFAULT_TOKEN_EXPIRY_TIME)
     failed_auth_at    = Column(DateTime)
     failed_auth_count = Column(Integer, default=0)
+    address           = Column(String(256), nullable=True)
     status            = Column(Integer, nullable=False, default=get_settings().USER_DEFAULT_STATUS)
 
     def __repr__(self):

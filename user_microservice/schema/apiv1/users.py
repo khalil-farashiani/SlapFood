@@ -26,3 +26,24 @@ class GetUser(BaseModel):
     class Config:
         extra = Extra.forbid
         orm_mode = True
+
+class CreateUSerRequest(BaseModel):
+    real_name : Optional[str] = Field(description="name of user system")
+    email : str               = Field(description="email of user system this is a required field") 
+    user_password : str       = Field(description="user password")
+    address : Optional[str]   = Field(description="user address this is a foreinkey to address table")
+    mobile : Optional[str]    = Field(description="mobile number of user")
+
+    class Config:
+        extra = Extra.forbid
+
+
+class CreateUSerResponse(BaseModel):
+    real_name : Optional[str] = Field(description="name of user system")
+    email : str               = Field(description="email of user system this is a required field") 
+    address : Optional[str]   = Field(description="user address this is a foreinkey to address table")
+    mobile : Optional[str]    = Field(description="mobile number of user")
+
+
+    class Config:
+        orm_mode = True

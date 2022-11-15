@@ -22,7 +22,7 @@ class Setting(BaseSettings):
     USER_DEFAULT_ROLE: str = "member"
     USER_DEFAULT_EXPIRES: int = 365
     USER_DEFAULT_STATUS: int = 3
-    USER_DEFAULT_TOKEN_EXPIRY_TIME: int = 86400
+    USER_DEFAULT_TOKEN_EXPIRY_TIME: str = '2015-09-01T16:34:02'
     USER_DEFAULT_TOKEN_ALGO: str = "HS512"
 
     class Config:

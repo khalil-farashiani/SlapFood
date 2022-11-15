@@ -26,6 +26,7 @@ def login(data: UserLoginRequest, db: Session = Depends(get_db)):
     if not verify_password(data.password, hashed_pass):
         return HTTPException(400,detail="username or password is incorrect")
     return {
+        "status_code": 200,
         "access_token": create_access_token(user['email']),
         "refresh_token":  create_refresh_token(user['email']),
     }
