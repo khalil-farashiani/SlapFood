@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from dependency import get_db
 from models.apiv1 import User
 from utils.password import get_hashed_password
-
+from utils.error import RestError
 user_router = APIRouter(
     prefix="/users",
     tags=["users"],
@@ -17,14 +17,16 @@ user_router = APIRouter(
 async def read_user(user_pk: str, db: Session = Depends(get_db)):
     user = get_user(db, user_pk)
     if user is None:
-        return HTTPException(404, detail="Not found")
+        error = RestError(error="user not found", external_status=400, status=400)
+        raise HTTPException(404, detail="Not found")
     return user
 
 @user_router.post("/")
 async def create_user(data: CreateUSerRequest, db: Session = Depends(get_db)):
     user = get_user_by_email(db, data.email)
     if user is not None:
-        return HTTPException(400, detail="email already taken")
+        error = RestError(error="email already taken", external_status=400, status=400)
+        raise HTTPException(400, detail=error)
     user = User(
         email=data.email,
         real_name=data.real_name,
@@ -35,8 +37,10 @@ async def create_user(data: CreateUSerRequest, db: Session = Depends(get_db)):
     try:
         make_user(db, user)
     except:
-        raise HTTPException(500, detail="unable to create user")
+        error = RestError(error="unable to create a new user, try later", external_status=500, status=500)
+        raise HTTPException(500, detail=error)
     return {
-        "status_code": 200,
+        "internal_status_code": 200,
+        "external_status_code": 200,
         "message": "user successfully create",
     }

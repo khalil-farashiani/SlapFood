@@ -4,7 +4,7 @@ services:
   #postgres_container
   postgres:
     container_name: postgres_container
-    image: regp.scratnet.com/docker.io/library/postgres
+    image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
