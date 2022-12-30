@@ -1,6 +1,7 @@
 package main
 
 import (
+	v1 "github.com/khalil-farashiani/SlapFood/product_microservice/delivery/http/v1"
 	"log"
 	"net/http"
 
@@ -12,6 +13,8 @@ func routes() http.Handler {
 		"start server on port 8080",
 	)
 	r := mux.NewRouter()
+
+	r.HandleFunc("/", v1.TestHandler).Methods("GET")
 	return r
 
 }
