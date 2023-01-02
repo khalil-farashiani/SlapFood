@@ -4,7 +4,7 @@ services:
   #postgres_container
   postgres:
     container_name: postgres_container
-    image: postgres
+    image: regp.scratnet.com/docker.io/library/postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
@@ -19,6 +19,22 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+
+  mongo:
+    container_name: mongo_container
+    image: mongo
+    volumes:
+      - mongo:/data/mongo
+    restart: always
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-root}
+        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-changeme}
+    ports:
+      - "27017:27017"
+    expose:
+      - 27017
+    networks:
+      - mongo
 
   #user-service container
   user-service:
@@ -35,11 +51,29 @@ services:
       replicas: 1
     networks:
       - postgres
-    
+  #product-service container
+  product-service:
+    build:
+      context: ./product_microservice
+      dockerfile: ./product-service.dockerfile
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - "8080:8080"
+    deploy:
+      mode: replicated
+      replicas: 1
+    networks:
+      - mongo
+
 networks:
   postgres:
+    driver: bridge
+  mongo:
     driver: bridge
 
 volumes:
     postgres:
+    mongo:
   

@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"flag"
+	"github.com/khalil-farashiani/SlapFood/product_microservice/adapter/store"
 	"log"
 	"net/http"
 	"os"
@@ -38,6 +39,9 @@ func main() {
 			log.Panic(err)
 		}
 	}()
+
+	mongo := store.InitMongo()
+	defer mongo.Disconnect(context.Background())
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)

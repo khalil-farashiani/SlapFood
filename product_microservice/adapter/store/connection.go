@@ -11,7 +11,7 @@ import (
 )
 
 func InitMongo() *mongo.Client {
-	client, err := mongo.NewClient(options.Client().ApplyURI("GET FROM ENV"))
+	client, err := mongo.NewClient(options.Client().ApplyURI("MONGO_URI"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -30,6 +30,6 @@ func InitMongo() *mongo.Client {
 		log.Fatal(err)
 	}
 	log.Println(databases)
-
+	log.Println("MongoDB Successfully connected..!!")
 	return client
 }
