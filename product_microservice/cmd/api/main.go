@@ -23,6 +23,9 @@ func main() {
 	flag.DurationVar(&wait, gracfullMessage, time.Second*15, durationMessage)
 	flag.Parse()
 
+	mongo := store.InitMongo("GET_MONGO_URI_FROM_ENV")
+	defer mongo.Db.Disconnect(context.Background())
+
 	r := routes()
 
 	srv := &http.Server{
@@ -39,9 +42,6 @@ func main() {
 			log.Panic(err)
 		}
 	}()
-
-	mongo := store.InitMongo()
-	defer mongo.Disconnect(context.Background())
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)

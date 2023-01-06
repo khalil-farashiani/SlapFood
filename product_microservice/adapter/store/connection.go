@@ -10,8 +10,12 @@ import (
 	"time"
 )
 
-func InitMongo() *mongo.Client {
-	client, err := mongo.NewClient(options.Client().ApplyURI("MONGO_URI"))
+type MongoDB struct {
+	Db *mongo.Client
+}
+
+func InitMongo(dsn string) MongoDB {
+	client, err := mongo.NewClient(options.Client().ApplyURI(dsn))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,5 +35,6 @@ func InitMongo() *mongo.Client {
 	}
 	log.Println(databases)
 	log.Println("MongoDB Successfully connected..!!")
-	return client
+
+	return MongoDB{Db: client}
 }
